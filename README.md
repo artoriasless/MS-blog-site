@@ -9,8 +9,10 @@ a blog site by Stan_Lee using node.js as server
 此项目做了进一步的改进，用nodejs作为后台服务器运行环境，数据库使用mysql，路由采用express 模块框架进行搭建。
 
 
+
 ##【关于博客内容编辑、上传】  ##
 现阶段，拟采用百度的umeditor（ueditor的mini版）。
+
 
 
 ##【更新、修改记录】  ##
