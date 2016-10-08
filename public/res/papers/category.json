@@ -1,0 +1,73 @@
+{
+"tags"    : {
+"html&css"  : ["4"],
+"javascript": ["6", "5", "3"],
+"jquery"    : ["0"],
+"bootstrap" : ["1"],
+"json"      : ["2"]
+},
+"timeline": {
+"2016-01": ["1", "0"],
+"2016-02": ["2"],
+"2016-03": ["3"],
+"2016-07": ["6", "5", "4"]
+},
+"category": [
+{
+"index"   : "0",
+"title"   : "【jQuery】animate、slide、fade等动画的连续触发及滞后反复执行的bug",
+"date"    : "2016-01-09",
+"tag"     : "jquery",
+"others"  : "",
+"abstract": "jquery中，使用animate、slide、fade等动画，如果多次触发（click、hover等），由于其执行是一个持续的过程，如果不采取一定的措施，会导致滞后多次执行的bug。"
+},
+{
+"index"   : "1",
+"title"   : "【bootstrap】tooltip在触发元素remove后的小bug",
+"date"    : "2016-01-15",
+"tag"     : "bootstrap",
+"others"  : "tooltip",
+"abstract": "bootstrap中的tooltip，当遇到以下情形时：将触发tooltip的a标签进行remove后，其对应的tooltip会一直显示在页面上，导致出现bug。"
+},
+{
+"index"   : "2",
+"title"   : "【json】读取本地json时，无法读取到的bug时，自己踩的一些坑",
+"date"    : "2016-02-10",
+"tag"     : "json",
+"others"  : "",
+"abstract": "之前自己做了个小东西，反正就是中间有一部要读取本地的json文件，然后就需要自己写一个自定义json文件用作测试，然后就碰到了一个小坑，发现读取失败（也就是读取成功后的回调函数没有执行）。另外，读取json文件用的是jquery提供的getJSON()方法。"
+},
+{
+"index"   : "3",
+"title"   : "【javascript】新增DOM节点无法监听事件，以及对于事件托管的个人感受",
+"date"    : "2016-03-20",
+"tag"     : "javascript",
+"others"  : "事件托管",
+"abstract": "写监听事件及对应的触发函数，遇到的一点小坑。针对页面上已存在DOM节点（直接写在HTML上的），获取对应的DOM进行事件监听，没有一点问题，但是如果监听的某一个DOM节点是通过js动态生成的话，发现之前的事件监听无法获取到该DOM节点。"
+},
+{
+"index"   : "4",
+"title"   : "【html&css】关于input输入框，在移动端，enter显示为“搜索”",
+"date"    : "2016-07-15",
+"tag"     : "html&css",
+"others"  : "html5，webapp",
+"abstract": "最近做一个项目，有一个小模块带有搜索功能。之前的前辈们直接监听keyup事件，即实时搜索（因为手机屏幕就那么点，没地方放“搜索”按钮），但是用过好多app后，感觉这一操作有点“反人类”（夸张了），而且动不动就去请求后台（虽说设置了500ms的延迟，但还是有点不够人性化），后来就想到了用大多数app的做法，监听enter事件，同时将“前往”两个字修改为“搜索”。"
+},
+{
+"index"   : "5",
+"title"   : "【javascript】关于js对象中，属性的“非常规”使用感受",
+"date"    : "2016-07-25",
+"tag"     : "javascript",
+"others"  : "json",
+"abstract": "之前关于js中对象的介绍，稍微了解到一点，js对象操作属性有两种方式：点号引用和中括号引用。后来实际使用中，感觉好像如果使用中括号，那对应的属性名，其实和数组的索引原理类似（至少看起来）。"
+},
+{
+"index"   : "6",
+"title"   : "【javascript】关于js函数自执行的另一种写法：function前加!、+、-等",
+"date"    : "2016-07-30",
+"tag"     : "javascript",
+"others"  : "自执行函数，匿名函数立即执行",
+"abstract": "最近闲着无聊，翻看了一下zepto的源码，虽说看的云里雾里，似懂非懂，无意间看到他的一种写法“+ function() {...}”，当时就蒙圈了，这特么这么写几个意思？后来百度了一下，好像是自执行函数的“非常规”写法（之所以说非常规，因为平常习惯的用法都是添加括号来调用匿名函数。"
+}
+]
+}

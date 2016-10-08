@@ -1,0 +1,57 @@
+#timeBlock {
+	padding: 0.125em 0;
+	border-radius: 5px;
+	overflow: hidden;
+	background: url(body-bg.png) no-repeat;
+	background-size: cover;
+	background-position: center center;
+}
+.crappy-plastic-part-made-in-china {
+	width: 185px;
+	height: 0.75em;
+	margin: 0 auto;
+	overflow: hidden;
+	font-size: 3em;
+}
+.pad {
+	width: 6em;
+	margin: 0 auto;
+	background: url(body-bg.png) no-repeat;
+	background-position: center center;
+}
+.pad ul {
+	width: 0.75em;
+	height: 6em;
+	padding: 0;
+	margin: -2.6em -21px 0 0;
+	list-style: none;
+	float:left;
+}
+.pad li {
+	width: 0.6em;
+	height: 1em;
+	line-height: 1.2;
+	font-family: "Helvetica Neue", Arial, sans-serif;
+	font-size: 0.6em;
+	color: #888;
+	text-align:center;
+	background: url(body-bg.png) no-repeat;
+	background-position: center center;
+	cursor: pointer;
+}
+.pad li.roundabout-in-focus { cursor: default; }
+#ampm,#ampm li { width:1.8em; }
+#ampm { margin-left: -0.1em;opacity: 0.75; }
+
+.delimiter, .delimiter li {
+	width: 0.5em;
+	text-align: center;
+}
+.delimiter {
+	margin-left: 6px;
+	margin-right: -12px;
+}
+.pad li span {
+	display: block;
+	padding-top: 6em;
+}

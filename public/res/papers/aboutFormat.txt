@@ -1,0 +1,21 @@
+﻿category and content for blog papers
+
+about category
+    标签对应的文章索引，按照时间，时间最早的在最后面，换言之，索引从大到小
+    年月对应的文章索引，按照时间，时间最早的在最后面，换言之，索引从大到小
+    目录内容，按照时间先后：时间最早的在最前面，即 2016-01-01 -> 2016-02-02 -> 2016-03-03
+
+format of paper content
+小标题   —— <strong></strong>
+章节标题 —— <p class="sub-chapter"></p>
+正文内容 —— <p></p>
+图片div  —— <div class="img-container"></div>
+              <div><img scr=""></div>                   
+代码div  —— <div class="code-container"></div>
+              <div><code><xmp></xmp></code></div>
+引用内容 —— <div class="refer-content"></div>
+              <div class="refer-content"><p></p></div>
+
+about name of images
+    关于博文中需要用到的图片，全部都存储在img文件夹中。
+    关于命名，建议命名格式如xxx-xx，图片统一采用jpg，如果是动态图统一用gif，前三位表示博文编号，即contentxxx.json中的编号，后两位xx表示在博文中的图片编号。

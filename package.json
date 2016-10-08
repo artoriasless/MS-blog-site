@@ -1,0 +1,19 @@
+{
+  "name": "ms-blog",
+  "version": "1.0.0",
+  "description": "a blog site by Stan_Lee using node.js as server",
+  "keywords": [
+    "blog",
+    "nodejs"
+  ],
+  "author": "Stan Lee",
+  "license": "MIT",
+  "dependencies": {
+  	"express"      : "~4.14.0",
+  	"body-parser"  : "~1.15.2",
+  	"cookie-parser": "~1.4.3",
+  	"multer"       : "~1.2.0",
+    "mysql"        : "~2.11.1",
+    "umeditor"     : "~1.2.5"
+  }
+}

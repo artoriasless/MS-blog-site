@@ -1,0 +1,260 @@
+/* custom css for papaers.html */
+body {
+	min-width: 1170px;
+	min-height: 500px;
+	background: url(../img/paper-bg.jpg) no-repeat fixed center center/cover;
+	-o-background: url(../img/paper-bg.jpg) no-repeat fixed center center/cover;
+	-ms-background: url(../img/paper-bg.jpg) no-repeat fixed center center/cover;
+	-moz-background: url(../img/paper-bg.jpg) no-repeat fixed center center/cover;
+	-webkit-background: url(../img/paper-bg.jpg) no-repeat fixed center center/cover;
+}
+#topAnchor { height: 0; }
+/*=========================
+	nav
+  =========================*/
+.nav-container {
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 999;
+
+	height: 50px;
+	border: 1px solid transparent;
+	border-width: 0 0 1px;
+	border-color: #e7e7e7;
+	border-radius: 0;
+
+	background-color: #ffffff;
+}
+.nav-content {
+	width: 1170px;
+	height: 50px;
+	padding-right: 10px;
+	padding-left: 10px;
+	margin-right: auto;
+	margin-left: auto;
+}
+.nav-header {
+	width: 150px;
+	height: 50px;
+	line-height: 30px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: center;
+}
+.nav-header #logoImg { height: 30px; }
+.nav-body .nav { height: 50px; }
+.nav-body .nav > li {
+	float: left;
+
+	height: 50px;
+	padding: 10px;
+	margin-right: 10px;
+	margin-left: 10px;
+
+	text-align: center;
+}
+.nav-body .nav > li a {
+	height: 30px;
+	line-height: 30px;
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+}
+.nav-body .nav > li a:hover { background-color: transparent; }
+.nav-body .nav > li a span {
+	position: relative;
+	display: inline-block;
+	-webkit-transition: -webkit-transform 0.3s;
+	-moz-transition: -moz-transform 0.3s;
+	transition: transform 0.3s;
+}
+.nav-body .nav > li a span:before {
+	content: attr(data-hover);
+	position: absolute;
+	top: 100%;
+	color: #111111;
+	-webkit-transform: translate3d(0,0,0);
+	-moz-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+}
+.nav-body .nav > li a span:hover {
+	-webkit-transform: translateY(-100%);
+	-moz-transform: translateY(-100%);
+	transform: translateY(-100%);
+}
+#blogLink { position: relative; }
+#blogLink:after {
+	content: "";
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #888888;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -5px;
+}
+#backLink { font-size: 0.75em; }
+/* nav END */
+
+/*=========================
+	content-body
+  =========================*/
+.body-container {
+	position: absolute;
+	width: 100%;
+	padding-top: 5px;
+	margin-top: 50px;
+	z-index: 2
+}
+.body-content {
+	width: 1170px;
+	padding-right: 10px;
+	padding-left: 10px;
+	margin-right: auto;
+	margin-left: auto;
+}
+/* tagList */
+#tagList dd .tag-name {
+	display: inline-block;
+	width: 5em;
+}
+/* latestList */
+#latestList a {
+	padding-left: 5px;
+	position: relative;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+#latestList a:before {
+	content: attr(data-no);
+	position: absolute;
+	display: block;
+	margin-left: -5px;
+	color: #111111;
+}
+/* timeList */
+#timeList .time-val {
+	display: inline-block;
+	width: 4.5em;
+}
+/* #tagList、#timeList dd markup hover animation */
+@keyframes move-animate {
+	0% { padding-left: 0; }
+	100% { padding-left: 15px; }
+}
+@-o-keyframes move-animate {
+	0% { padding-left: 0; }
+	100% { padding-left: 15px; }
+}
+@-ms-keyframes move-animate {
+	0% { padding-left: 0; }
+	100% { padding-left: 15px; }
+}
+@-moz-keyframes move-animate {
+	0% { padding-left: 0; }
+	100% { padding-left: 15px; }
+}
+@-webkit-keyframes move-animate {
+	0% { padding-left: 0; }
+	100% { padding-left: 15px; }
+}
+#tagList dd a:hover, 
+#timeList dd a:hover {
+	animation: move-animate 0.5s ease;
+	-o-animation: move-animate 0.5s ease;
+	-ms-animation: move-animate 0.5s ease;
+	-moz-animation: move-animate 0.5s ease;
+	-webkit-animation: move-animate 0.5s ease;
+	padding-left: 15px;
+}
+#tagList dd a:hover:before, 
+#timeList dd a:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 50%;
+	left: 0;
+	margin-top: -5px;
+	border-top: 5px solid transparent;
+	border-bottom: 5px solid transparent;
+	border-left: 5px solid #888888;
+}
+/* paper content */
+.category .paper-subtitle, .category .paper-footer, .category .footer-hr { display: none; }
+#paperContent hr {
+	padding: 0;
+	margin: 0;
+}
+#paperContent .paper-footer { margin: 15px 25px 50px;font-size: 0.75em; }
+#paperContent .paper-footer > div { height: 20px;line-height: 20px; }
+#paperContent .paper-footer .pre-title { text-align: left; }
+#paperContent .paper-footer .next-title { text-align: right; }
+#paperContent .paper-footer a { width: 300px;height:20px;line-height: 20px;display: inline-block;white-space: nowrap;overflow: hidden;text-overflow: ellipsis; }
+#paperContent .paper-footer i { height: 20px;line-height: 20px; }
+/* paper page */
+#paperPage { display: none;margin: 10px auto;text-align: center; }
+.category #paperPage { display: block; }
+#paperPage a { margin: 0 5px; }
+/* aboutModal、contactModal */
+#aboutModal .modal-dialog { margin: 100px auto; }
+#contactModal .modal-dialog { margin: 150px auto; }
+#aboutModal .modal-header, #contactModal .modal-header, #contactModal .modal-body { text-align: center; }
+#aboutModal .modal-body a:hover, #contactModal .modal-body a:hover { text-decoration: none; }
+#aboutModal .modal-body dt:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 50%;
+	left: 0;
+	margin-top: -5px;
+	margin-left: -10px; 
+	border-top: 5px solid transparent;
+	border-bottom: 5px solid transparent;
+	border-left: 5px solid #888888;
+}
+/* content-body END */
+@keyframes scroll-hover {
+	0% { opacity: 0.25; }
+	50% { opacity: 0.5; }
+	100% { opacity: 0.25; }
+}
+@-o-keyframes scroll-hover {
+	0% { opacity: 0.25; }
+	50% { opacity: 0.5; }
+	100% { opacity: 0.25; }
+}
+@-ms-keyframes scroll-hover {
+	0% { opacity: 0.25; }
+	50% { opacity: 0.5; }
+	100% { opacity: 0.25; }
+}
+@-moz-keyframes scroll-hover {
+	0% { opacity: 0.25; }
+	50% { opacity: 0.5; }
+	100% { opacity: 0.25; }
+}
+@-webkit-keyframes scroll-hover {
+	0% { opacity: 0.25; }
+	50% { opacity: 0.5; }
+	100% { opacity: 0.25; }
+}
+#scrollBtn {
+	position: fixed;
+	display: block;
+	width: 50px;
+	height: 50px;
+	bottom: 50px;
+	right: 50px;
+	z-index: 999;
+	opacity: 0.25;
+}
+#scrollBtn:hover {
+	animation: scroll-hover 1.5s infinite;
+	-o-animation: scroll-hover 1.5s infinite;
+	-ms-animation: scroll-hover 1.5s infinite;
+	-moz-animation: scroll-hover 1.5s infinite;
+	-webkit-animation: scroll-hover 1.5s infinite;
+}
