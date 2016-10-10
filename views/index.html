@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <!--[if lt IE 9]>
+        <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <title>首页</title>
+        <link rel="shortcut icon" type="image/ico" href="res/img/favicon.ico">
+        <!-- font-awesome -->
+        <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css">
+        <!-- bootstrap css -->
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+        <!-- show time plugin -->
+        <link rel="stylesheet" type="text/css" href="plugins/roundabout/roundabout2.css">
+        <!-- custom css -->
+        <link rel="stylesheet" type="text/css" href="res/css/stylesheet.css" media="screen">
+
+        <link rel="stylesheet" type="text/css" href="res/css/common.css">
+        <link rel="stylesheet" type="text/css" href="res/css/app.css">
+    </head>
+
+    <body>
+        <div id="topAnchor"></div>
+        <nav class="nav-container">
+            <div class="nav-content">
+                <div class="nav-header pull-left">
+                    <img id="logoImg" src="res/img/logo.png">
+                </div>
+                <div class="nav-body">
+                    <ul class="nav nav-list pull-left">
+                        <li>
+                            <a id="blogLink">
+                                <i class="fa fa-book"></i>&nbsp;<span data-hover="目录">Blog</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a id="aboutLink" data-toggle="modal" data-target="#aboutModal">
+                                <i class="fa fa-info-circle"></i>&nbsp;<span data-hover="关于">About</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a id="contactLink" data-toggle="modal" data-target="#contactModal">
+                                <i class="fa fa-envelope-o"></i>&nbsp;<span data-hover="粉我！">Contact</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav pull-right">
+                        <li>
+                            <a href="index.html"><img class="avatar" src=""></a>
+                        </li>
+                        <li>
+                            <a href="index.html" id="backLink">Back To Homepage&nbsp;<i class="fa fa-sign-out"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="mask-container"></div>
+        <div id="loading" class="loading">Loading</div>
+        <div id="scrollBtn" onclick="$('#topAnchor').HoverTreeScroll(750);"><img src="res/img/scroll-bg.png"></div>
+        
+        <div id="bodyContainer" class="body-container hidden category init">
+            <!-- class="category"，区别【全部文章title】和【某一类别下文章title或某一篇具体文章】 -->
+            <div class="body-content row">
+                <div class="col-xs-3">
+                    <!-- Notice -->
+                    <div class="content-block">
+                        <dl class="comm-dl">
+                            <dt>Notice</dt>
+                            <dd>
+                                <i class="fa fa-circle"></i>&nbsp;
+                                访问本 Blog ，未避免部分样式失效，请使用内核支持 CSS3 的浏览器， IE 浏览器请使用 IE9+ 版本。
+                            </dd>
+                            <dd>
+                                <i class="fa fa-circle"></i>&nbsp;
+                                本网站仅供交流阅读使用，转载请注明出处，谢谢。
+                            </dd>
+                            <dd>
+                                <i class="fa fa-circle"></i>&nbsp;
+                                网站刚搭建完成没多久，其实是把我在博客园的内容迁移过来，顺带还有一些新的内容还没添加上来，导致看起来东西很少，尽快会完善页面并将内容整体迁移过来。
+                            </dd>
+                            <dd>
+                                <i class="fa fa-warning text-danger"></i>
+                                关于博文中的代码显示不正常，因为使用了xmp标签,可能在IE下会显示不正常，关于解决方案，作者会尽快想一个好的解决办法的。
+                            </dd>
+                        </dl>
+                    </div><!-- Notice END -->
+
+                    <!-- Tags -->
+                    <div class="content-block">
+                        <dl id="tagList" class="comm-dl">
+                            <dt>Tags</dt>
+                            <!-- show tags -->
+                        </dl>
+                    </div><!-- Tags END -->
+
+                    <!-- Latest five papers -->
+                    <div class="content-block">
+                        <dl id="latestList" class="comm-dl">
+                            <dt>Latest</dt>
+                            <!-- <dd><a>文章标题</a></dd> -->
+                        </dl>
+                    </div><!-- Latest END -->
+
+                    <!-- timeline -->
+                    <div class="content-block">
+                        <dl id="timeList" class="comm-dl">
+                            <a class="content-icon"><i class="fa fa-history"></i></a>
+                            <dt id="timeLineTitle">
+                                Timeline<br>
+                                <div id="timeBlock"><!-- to show current time -->
+                                    <div class="crappy-plastic-part-made-in-china">
+                                        <div class="pad">
+                                            <ul id="hours-tens"><li>&nbsp;</li><li>1</li></ul>
+                                            <ul id="hours-ones"><li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li></ul>
+                                            <ul class="delimiter"><li>:</li></ul>
+                                            <ul id="minutes-tens"><li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li></ul>
+                                            <ul id="minutes-ones"><li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li></ul>
+                                            <ul class="delimiter"><li>.</li></ul>
+                                            <ul id="seconds-tens"><li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li></ul>
+                                            <ul id="seconds-ones"><li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li></ul>
+                                            <ul id="ampm"><li>am</li><li>pm</li></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </dt>
+                            <!-- <dd>2011-01-01</dd> -->
+                        </dl>
+                    </div><!-- timelie END -->
+                </div>
+
+                <div class="col-xs-9">
+                    <div id="paperContent" class="content-block">
+                        <div class="paper-title">
+                            <h1>Directory</h1>
+                        </div>
+                        <div class="paper-subtitle">
+                            <h3>
+                                <span class="subtitle-date">
+                                    <i class="fa fa-calendar"></i>&nbsp;<span class="date-val"></span>
+                                </span>
+                                <span class="subtitle-tags">
+                                    <i class="fa fa-tags"></i>&nbsp;<span class="tags-val"></span>
+                                </span>
+                            </h3>
+                        </div>
+                        <hr>
+                        <div class="paper-content"></div>
+                        <hr class="footer-hr">
+                        <div class="paper-footer row">
+                            <div class="col-xs-6 pre-title">
+                                <i class="fa fa-arrow-circle-o-left pull-left"></i><a id="prePaper"></a>
+                            </div>
+                            <div class="col-xs-6 next-title">
+                                <a id="nextPaper"></a><i class="fa fa-arrow-circle-o-right pull-right"></i>
+                            </div>
+                        </div>
+                        <div id="paperPage"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="aboutModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <h4 class="modal-title" id="aboutModalLabel">About</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <dl class="comm-dl">
+                            <dt>About WebPage</dt>
+                            <dd>
+                                关于网站，除了感谢github、bootstrap、jquery、font-awesome和roundabout外，还得谢谢Jason Long，因为首页（index.html，就是整个博客刚进来那一页内容）就是在他分享的模板的基础上进行修改的。<br>
+                                关于本网站的源码，我已经放在github上了，有兴趣的小伙伴可以通过“Contact Me!”里面的github链接，到我github主页下查看对应项目。<br>
+                                PS：好像感谢了他们也看不到，不过还是得感谢一下。
+                            </dd>
+
+                            <dt>About Blog</dt>
+                            <dd>
+                                关于这个博客的内容，其实大多数内容都是自己的一些笔记和踩过坑。<br>
+                                PS：其实这些个内容都是别人踩过的坑，百度都能搜得到，不过还是想把这些放上来，作为自己的一个学习的笔记。
+                            </dd>
+
+                            <dt>About Website</dt>
+                            <dd>
+                                关于这个网站的内容，除去首页用了Json Long的模板再做点了修改，内容显示页，全部采用原创手写，虽说挺费时间，不过至少达到了自己要的效果。<br>
+                                内容展示页面采用和SPA类似的渲染方式，至于数据存储，因为没有用到数据库这一方面的东西（自己不会，也暂时不想费时去折腾），就采用了引入本地json来模拟ajax的情形。<br>
+                                PS：这个网站暂时没做自适应（布局不太好调整），等PC端的完成了，之后会再新增一个专门针对wap的版本。<br>另外，对于代码高亮这块，是我个人做的一套方案，只有html、css及js的代码显示和行号，但是没做高亮，主要是还是觉得别人的解决方案有点蛋疼、复杂，虽说是用js自动转的，后续再考虑如何解决这块吧。
+                            </dd>
+                        </dl>
+                    </div><!-- modal-baody -->
+                </div><!-- modal-content -->
+            </div><!-- modal-dialog -->
+        </div><!-- about modal -->
+
+        <div id="contactModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <h4 class="modal-title" id="contactModalLabel">Contact ME!</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <a data-toggle="tooltip" title="view on github" href="https://github.com/MonkingStand" target="_blank">
+                            <i class="fa fa-lg fa-github"></i>
+                        </a>&nbsp;&nbsp;
+                        <a data-toggle="tooltip" title="email me" href="mailto:tangjianyi1993@live.com?subject=would you mind have a small talk">
+                            <i class="fa fa-lg fa-envelope"></i>
+                        </a>&nbsp;&nbsp;
+                        <a data-toggle="tooltip" title="follow me on weibo" href="http://weibo.com/monkingstand" target="_blank">
+                            <i class="fa fa-lg fa-weibo"></i>
+                        </a>&nbsp;&nbsp;
+                        <a data-toggle="tooltip" title="follow me on wechat" href="res/img/wechat-qr.jpg" target="_blank">
+                            <i class="fa fa-lg fa-weixin"></i>
+                        </a>&nbsp;&nbsp;
+                        <a data-toggle="tooltip" title="follow me on qq" href="http://sighttp.qq.com/msgrd?v=3&uin=913270680&site=&menu=yes" target="_blank">
+                            <i class="fa fa-lg fa-qq"></i>
+                        </a>
+                    </div><!-- modal-baody -->
+                </div><!-- modal-content -->
+            </div><!-- modal-dialog -->
+        </div><!-- contact modal -->
+
+        <!-- jquery -->
+        <script type="text/javascript" src="jquery/2.1/jquery.js"></script>
+        <!-- bootstrap js -->
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <!-- show time plugin -->
+        <script type="text/javascript" src="plugins/roundabout/jquery.roundabout2.js"></script>
+        <script type="text/javascript" src="plugins/roundabout/jquery.roundabout-shapes2.js"></script>
+        <script type="text/javascript" src="plugins/roundabout/jquery.easing.js"></script>
+        <!-- scrolltree plugin -->
+        <script type="text/javascript" src="plugins/scrolltree/hoverTreeScroll.js"></script>
+        <!-- sys js -->
+        <script type="text/javascript" src="res/js/app.js"></script>
+        <!-- main js -->
+        <script type="text/javascript" src="res/js/main.js"></script>
+    </body>
+</html>
