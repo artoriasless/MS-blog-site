@@ -1,14 +1,28 @@
 var express = require('express'),
     app     = express(),
-    server;
+    server,
+
+    bodyParser = require('body-parser'),
+    urlencodedParser = bodyParser.urlencoded({
+        extended: false
+    });
+
+/* router level */
+var router = require('./routes/router.js');
+
+/* controller level */
+var controller = require('./controllers/controller.js');
 
 app.use(express.static('public'));
-app.use(express.static('views'));
 
-app.get('/index.html', function(request, response) {
-    response.sendFile(__dirname + '/' + 'index.html');
+app.get('/*', function(request, response) {
+    router.route(__dirname, request, response);
+});
+
+app.post('/*', urlencodedParser, function(request, response) {
+    controller.controll(request, response);
 })
 
 server = app.listen(8181, function() {
-	console.info('应用实例，访问地址为：http://127.0.0.1:8181/index.html');
+	console.info('app sample,view address：http://127.0.0.1:8181/index.html');
 })
