@@ -14,6 +14,7 @@
   	"cookie-parser": "~1.4.3",
   	"multer"       : "~1.2.0",
     "mysql"        : "~2.11.1",
-    "umeditor"     : "~1.2.5"
+    "umeditor"     : "~1.2.5",
+    "express-mysql-session": "~1.2.0"
   }
 }
