@@ -15,3 +15,5 @@ a blog site by Stan_Lee using node.js as server
 
 ##【更新、修改记录】  ##
 2016-10-08　项目目录结构构思搭建。
+
+2016-10-11  原定博客 内容 在线编辑、修改、上传暂时搁置，先将原纯静态网站用nodejs重新搭建。
