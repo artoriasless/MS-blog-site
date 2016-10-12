@@ -13,7 +13,6 @@
   	"body-parser"  : "~1.15.2",
   	"cookie-parser": "~1.4.3",
   	"multer"       : "~1.2.0",
-    "mysql"        : "~2.11.1",
-    "umeditor"     : "~1.2.5"
+    "mysql"        : "~2.11.1"
   }
 }
