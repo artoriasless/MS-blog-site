@@ -10,15 +10,16 @@ $(function() {
 	$('[data-toggle="tooltip"]').tooltip();
 })
 
+/* back to home directory */
+$('#blogLink').on('click', function() {
+    if (!$('#bodyContainer').hasClass('init')) {
+        papers.initCategory();
+    }
+})
+
 /* after click contact-link,hide modal */
 $('a[data-toggle="tooltip"]').bind('click', function() {
 	$('#contactModal').modal('hide');
-})
-
-$('#blogLink').on('click', function() {
-	if (!$('#bodyContainer').hasClass('init')) {
-		papers.initCategory(category);
-	}
 })
 
 /* time roundabout init */
