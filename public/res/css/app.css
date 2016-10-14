@@ -115,6 +115,14 @@ body {
 	margin-right: auto;
 	margin-left: auto;
 }
+/* noticeList */
+#noticeToggleBtn {
+	display: inline-block;
+	width: 25px;
+	margin-right: 5px; 
+	float: right;
+	text-align: center;
+}
 /* tagList */
 #tagList dd .tag-name {
 	display: inline-block;
