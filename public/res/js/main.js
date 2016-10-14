@@ -2,18 +2,36 @@ console.log('Thx for visiting my blog!');
 
 /* init papers.html */
 $(document).ready(function(){
-    papers.init();
-})
+    /* tooltip init */
+    $(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+    })
 
-/* tooltip init */
-$(function() {
-	$('[data-toggle="tooltip"]').tooltip();
+    /* slideUp notice content in 3s */
+    setTimeout(function() {
+        $('#noticeToggleBtn').closest('dl').find('dd').slideUp();
+        $('#noticeToggleBtn').find('.fa').removeClass('fa-caret-down').addClass('fa-caret-right');
+    }, 3000);
+
+    papers.init();
 })
 
 /* back to home directory */
 $('#blogLink').on('click', function() {
     if (!$('#bodyContainer').hasClass('init')) {
         papers.initCategory();
+    }
+})
+
+/* toggle notice content */
+$('#noticeToggleBtn').on('click', function() {
+    var $icon = $(this).find('.fa');
+    $(this).parent().closest('dl').find('dd').slideToggle();
+    if ($icon.hasClass('fa-caret-down')) {
+        $icon.removeClass('fa-caret-down').addClass('fa-caret-right');
+    }
+    else {
+        $icon.removeClass('fa-caret-right').addClass('fa-caret-down');
     }
 })
 
