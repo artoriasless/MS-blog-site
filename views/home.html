@@ -157,6 +157,14 @@
                                 <a id="nextPaper"></a><i class="fa fa-arrow-circle-o-right pull-right"></i>
                             </div>
                         </div>
+                        <hr class="footer-hr">
+                        <div class="comment-container">
+                            <div>
+                                <strong class="comment-title"><i class="fa fa-commenting-o"></i>&nbsp;Comments</strong>
+                                <a id="commentPaperBtn" class="pull-right"><i class="fa fa-comment-o"></i>&nbsp;回复</a>
+                            </div>
+                            <div class="comment-content"></div>
+                        </div>
                         <div id="paperPage" class="no-page"></div>
                     </div>
                 </div>
@@ -196,7 +204,7 @@
                                 原本想把登录注册以及在线编辑、修改文章以及评论等等功能做上的，后来发现工作量有点大，暂时先搁置了，等有机会了再扩展一下吧。
                             </dd>
                         </dl>
-                    </div><!-- modal-baody -->
+                    </div><!-- modal-body -->
                 </div><!-- modal-content -->
             </div><!-- modal-dialog -->
         </div><!-- about modal -->
@@ -227,10 +235,50 @@
                         <a data-toggle="tooltip" title="follow me on qq" href="http://sighttp.qq.com/msgrd?v=3&uin=913270680&site=&menu=yes" target="_blank">
                             <i class="fa fa-lg fa-qq"></i>
                         </a>
-                    </div><!-- modal-baody -->
+                    </div><!-- modal-body -->
                 </div><!-- modal-content -->
             </div><!-- modal-dialog -->
         </div><!-- contact modal -->
+
+        <div id="commentModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <h4 class="modal-title" id="commentModalLabel">Add Message</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label for="userName" class="col-xs-2 control-label">Your Name</label>
+                                <div class="col-xs-10">
+                                    <input type="text" class="form-control" id="userName" placeholder="type your nickname here...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="messageContent" class="col-xs-2 control-label">Your message</label>
+                                <div class="col-sm-10">
+                                    <!--<input type="text" class="form-control" id="messageContent" placeholder="type your message here...">-->
+                                    <textarea class="form-control" id="messageContent" placeholder="type your message here..." cols="5"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row operate-container">
+                            <div class="col-xs-5 text-right">
+                                <a id="commentSubmitBtn" class="btn btn-default">submit</a>
+                            </div>
+                            <div id="submitProcess" class="col-xs-2 text-center"><i class="fa fa-spinner fa-spin"></i></div>
+                            <div class="col-xs-5 text-left">
+                                <a class="btn btn-default" data-dismiss="modal">cancel</a>
+                            </div>
+                        </div>
+                    </div><!-- modal-body -->
+                </div><!-- modal-content -->
+            </div><!-- modal-dialog -->
+        </div><!-- about modal -->
 
         <!-- jquery -->
         <script type="text/javascript" src="jquery/2.1/jquery.js"></script>

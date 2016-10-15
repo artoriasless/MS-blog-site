@@ -3,11 +3,15 @@ var controllCategory = {
     '/initLatest.node'  : 'viewSqlInitLatest',
     '/initTimeline.node': 'viewSqlInitTimeline',
     '/initCategory.node': 'viewSqlInitCategory',
+    '/initComment.node' : 'viewSqlInitComment',
 
     '/categoryByTagName.node' : 'viewSqlCategoryByTagName',
     '/categoryByTimeline.node': 'viewSqlCategoryByTimeline',
 
-    '/paperById.node': 'viewSqlPaperById'
+    '/paperById.node': 'viewSqlPaperById',
+
+    '/addComment.node'   : 'addSqlComment',
+    '/addSubcomment.node': 'addSqlSubcomment'
 };
 
 var controll = function(request, response) {

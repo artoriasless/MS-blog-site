@@ -196,12 +196,73 @@ body {
 	padding: 0;
 	margin: 0;
 }
-#paperContent .paper-footer { margin: 15px 25px 50px;font-size: 0.75em; }
+#paperContent .paper-footer { margin: 15px 25px;font-size: 0.75em; }
 #paperContent .paper-footer > div { height: 20px;line-height: 20px; }
 #paperContent .paper-footer .pre-title { text-align: left; }
 #paperContent .paper-footer .next-title { text-align: right; }
 #paperContent .paper-footer a { width: 300px;height:20px;line-height: 20px;display: inline-block;white-space: nowrap;overflow: hidden;text-overflow: ellipsis; }
 #paperContent .paper-footer i { height: 20px;line-height: 20px; }
+/* comment container */
+.category .comment-container {
+	display: none;
+}
+.comment-container {
+	padding: 15px 15px 0;
+}
+.comment-container .comment-content {
+	margin: 15px 0;
+}
+.comment-container .comment-content.no-comment:after {
+	display: block;
+	content: "-----暂无评论，快来抢沙发！-----";
+	font-size: 0.75em;
+	text-align: center;
+}
+#commentPaperBtn {
+	height: 24px;
+	line-height: 24px;
+	font-size: 0.75em;
+}
+#commentPaperBtn:hover i.fa:before {
+	content: "\f27b";
+}
+.comment-item {
+	padding: 5px 10px;
+	margin: 5px 0; 
+	border: 1px solid #aaa;
+	border-radius: 5px;
+	background-color: #fff;
+	font-size: 0.85em;
+}
+.comment-item .item-content {
+	padding: 5px 0;
+	border-top: 1px solid #f5f5f5;
+	border-bottom: 1px solid #eee;
+}
+.comment-item .item-content p {
+	position: relative;
+	margin: 0;
+	text-indent: 2em;
+}
+.comment-item .item-footer {
+	margin-top: 5px;
+	font-size: 0.75em;
+	text-align: right;
+}
+.comment-item .subcomment-btn:hover i.fa:before {
+	content: "\f27b";
+}
+/*.comment-item.comment-type-0 { margin-left: 0; }*/
+.comment-item.comment-type-1 { margin-left: 25px; }
+.comment-item.comment-type-2 { margin-left: 50px; }
+.comment-item.comment-type-3 { margin-left: 75px; }
+.comment-item.comment-type-4 { margin-left: 100px; }
+.comment-item.comment-type-5 { margin-left: 125px; }
+.comment-item.comment-type-6 { margin-left: 150px; }
+.comment-item.comment-type-7 { margin-left: 175px; }
+.comment-item.comment-type-8 { margin-left: 200px; }
+.comment-item.comment-type-9 { margin-left: 225px; }
+.comment-item.comment-type-10 { margin-left: 250px; }
 /* paper page */
 #paperPage { margin: 10px auto;text-align: center; }
 .category #paperPage { display: block; }
@@ -212,7 +273,8 @@ body {
 /* aboutModal、contactModal */
 #aboutModal .modal-dialog { margin: 100px auto; }
 #contactModal .modal-dialog { margin: 150px auto; }
-#aboutModal .modal-header, #contactModal .modal-header, #contactModal .modal-body { text-align: center; }
+#commentModal .modal-dialog { margin: 100px auto; }
+#aboutModal .modal-header, #contactModal .modal-header, #contactModal .modal-body, #commentModal .modal-header { text-align: center; }
 #aboutModal .modal-body a:hover, #contactModal .modal-body a:hover { text-decoration: none; }
 #aboutModal .modal-body dt:before {
 	content: "";
@@ -225,6 +287,37 @@ body {
 	border-top: 5px solid transparent;
 	border-bottom: 5px solid transparent;
 	border-left: 5px solid #888888;
+}
+#commentModal textarea {
+	height: 7.5em;
+	resize: none;
+}
+#commentModal .operate-container {
+	margin-top: 50px;
+}
+#commentModal #submitProcess {
+	height: 34px;
+	line-height: 34px;
+	visibility: hidden;
+}
+#commentModal #submitProcess.comment-submiting {
+	visibility: visible;
+}
+/* alert container */
+.alert-container {
+	position: fixed;
+	min-width: 250px;
+	top: 10px;
+	right: 0;
+	z-index: 9999;
+}
+.alert-container .alert {
+	padding: 5px 15px;
+	margin: 0;
+}
+.alert-container .alert a, 
+.alert-container .alert strong {
+	margin: 0 10px;
 }
 /* content-body END */
 @keyframes scroll-hover {

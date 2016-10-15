@@ -135,6 +135,10 @@ var papers = {
 		})
 	},
 	renderPaper: function(paperId) {
+		$('#commentPaperBtn').attr({
+			'onclick': 'papers.typeComment(\'' + paperId + '\')'
+		});
+
 		var renderContent = function(contentArr) {
 			window.scrollTo(0, 0);
 			hideContent('#paperContent');
@@ -208,6 +212,126 @@ var papers = {
 				renderContent(data);
 			}
 		})
+
+		this.initComment(paperId);
+	},
+	initComment: function(paperId) {
+		var renderComment = function(commentArr) {
+			var commentCount = commentArr.length,
+				commentStr   = '';
+			
+			if (commentCount == 0) {
+				$('.comment-content').empty().addClass('no-comment');
+				return ;
+			}
+
+			for (var i = 0; i < commentCount; i ++) {
+				var reply       = '',
+					subArgument = (',' + commentArr[i].commentId + ',' + (parseInt(commentArr[i].type) + 1));
+				if (commentArr[i].type >= 1) {
+					reply = '<strong>&nbsp;<i class="fa fa-mail-forward"></i>&nbsp;</strong>' + commentArr[i-1].userName; 
+				}
+
+				commentStr += '<div id="' + commentArr[i].commentId + '" class="comment-item comment-type-' + commentArr[i].type + '">' +
+							      '<div class="item-header">' + commentArr[i].userName + reply + '</div>' +
+								  '<div class="item-content"><p>' + commentArr[i].content + '</p></div>' +
+								  '<div class="item-footer">' + 
+								      commentArr[i].commentDate + '&nbsp;|&nbsp;' +
+									  '<a class="subcomment-btn" onclick="papers.typeComment(\'' + paperId + subArgument + '\')"><i class="fa fa-comment-o"></i>&nbsp;回复</a>' +
+							      '</div>' +
+							  '</div>';
+			}
+
+			$('.comment-content').empty().removeClass('no-comment').append(commentStr);
+		};
+
+		$.ajax({
+			url: 'http://127.0.0.1:8181/initComment.node',
+			type: 'POST',
+			dataType: 'JSON',
+			data: {
+				'paperId': paperId
+			},
+			success: function(data) {
+				renderComment(data);
+			}
+		})
+	},
+	typeComment: function(typeArgument) {
+		$('#commentModal input').val('');
+		$('#commentModal textarea').val('');
+		$('#commentModal #submitProcess').removeClass('comment-submiting');
+
+		$('#commentModal #commentSubmitBtn').attr({
+			'onclick': 'papers.publishComment(\'' + typeArgument +'\')'
+		})
+		
+		$('#commentModal').modal();
+	},
+	publishComment: function(publishArgument) {
+		var argumentList   = publishArgument.split(','),
+			paperId        = argumentList[0], 
+			commentType    = argumentList[1] ? 'subcomment' : 'comment',
+			postName       = argumentList[1] ? 'addSubcomment.node' : 'addComment.node',
+			upcommentId    = argumentList[1] ? argumentList[1] : -1,
+			subcommentType = argumentList[2] ? argumentList[2] : -1,
+			
+
+			userName = $('#commentModal #userName').val(),
+			content  = $('#commentModal #messageContent').val(),
+
+			tempDate    = new Date(),
+			currentDate = tempDate.toLocaleDateString() + ' ' + 
+						  tempDate.getHours() + ':' + 
+						  tempDate.getMinutes() + ':' + 
+						  tempDate.getSeconds();
+		
+		var jsonData = {};
+		
+		if (userName == '' || content == '') {
+			var alertInfo = (userName == '') ? 'please complete your nickname for others to know you...' : 'please complete message...';
+			
+			showAlert(alertInfo);
+			return ;
+		}
+
+		$('#submitProcess').addClass('comment-submiting');
+		
+		if (commentType == 'comment') {
+			jsonData = {
+				colsName: ['type', 'paper_id', 'user_name', 'content', 'comment_date'],
+				valsArr : ['0', paperId, userName, content, currentDate]
+			}
+		}
+		else {
+			jsonData = {
+				'colsName': ['type', 'paper_id', 'user_name', 'content', 'comment_date', 'comment_id'],
+				'valsArr' : [subcommentType, paperId, userName, content, currentDate, upcommentId]
+			}
+		}
+
+		$.ajax({
+			url: 'http://127.0.0.1:8181/' + postName,
+			type: 'POST',
+			dataType: 'JSON',
+			data: jsonData,
+			success: function(data) {
+				if (data.status == 'success') {
+					var alertInfo = 'comment submited successfully...';
+
+					showAlert(alertInfo);
+					setTimeout(function(){
+						papers.initComment(paperId);
+						$('#commentModal').modal('hide');
+					}, 1000);
+				}
+				else {
+					var alertInfo = 'due to the network or other causes,comment submited faild,please try again leater...';
+
+					showAlert(alertInfo);
+				}
+			}
+		})
 	}
 }
 
@@ -221,6 +345,23 @@ function showContent(selector) {
     	$('#loading').addClass('hidden');
     	$(selector).removeClass('hidden').addClass('fade-in-animate');
     }, 1000)
+}
+
+function showAlert(alertInfo) {
+	var alertStr  = '<div class="alert-container">' +
+						'<div class="alert alert-warning">' +
+							'<a class="close" data-dismiss="alert">&times;</a>' +
+							'<strong><i class="fa fa-info-circle text-danger"></i></strong>' + alertInfo +
+						'</div>' +
+					'</div>';
+	
+	$('body').append(alertStr);
+	setTimeout(function(){
+		$('.alert-container').fadeOut(1000);
+		setTimeout(function(){
+			$('.alert-container').remove();
+		}, 1000);
+	}, 1000);
 }
 
 /* export */
