@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2016-10-12 16:35:31
+Date: 2016-10-16 16:15:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -21,13 +21,14 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `comment_table`;
 CREATE TABLE `comment_table` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `type` int(2) unsigned NOT NULL DEFAULT '0',
   `content` text CHARACTER SET utf8 NOT NULL COMMENT '用户评论的主体内容',
   `user_id` int(10) unsigned NOT NULL COMMENT '评论的用户id',
   `user_name` char(20) CHARACTER SET utf8 NOT NULL COMMENT '评论的用户名',
   `paper_id` int(10) unsigned NOT NULL COMMENT '评论所属的文章id',
   `comment_date` datetime NOT NULL COMMENT '评论日期',
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Table structure for papers_table
@@ -44,7 +45,7 @@ CREATE TABLE `papers_table` (
   `content` text CHARACTER SET utf8 NOT NULL COMMENT '文章主体内容',
   UNIQUE KEY `id` (`id`),
   KEY `title` (`title`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Table structure for subcomment_table
@@ -57,11 +58,12 @@ CREATE TABLE `subcomment_table` (
   `paper_id` int(10) unsigned NOT NULL COMMENT '子评论所属的文章id',
   `comment_id` int(10) unsigned NOT NULL COMMENT '所属评论的id',
   `comment_date` datetime NOT NULL COMMENT '子评论发布的时间',
+  `user_name` char(20) CHARACTER SET utf8 DEFAULT NULL,
   UNIQUE KEY `id` (`id`),
   KEY `type` (`type`),
   KEY `paper_id` (`paper_id`),
   KEY `comment_id` (`comment_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Table structure for tags_index
@@ -128,6 +130,7 @@ DELIMITER ;
 DROP TRIGGER IF EXISTS `update_trigger_before`;
 DELIMITER ;;
 CREATE TRIGGER `update_trigger_before` BEFORE UPDATE ON `papers_table` FOR EACH ROW SET new.content = REPLACE(REPLACE(new.content, CHAR(10), ''), CHAR(13), '')
+;
 ;;
 DELIMITER ;
 DROP TRIGGER IF EXISTS `update_trigger_after`;
