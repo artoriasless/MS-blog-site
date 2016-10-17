@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2016-10-16 16:15:53
+Date: 2016-10-17 09:34:43
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,7 +28,7 @@ CREATE TABLE `comment_table` (
   `paper_id` int(10) unsigned NOT NULL COMMENT '评论所属的文章id',
   `comment_date` datetime NOT NULL COMMENT '评论日期',
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Table structure for papers_table
@@ -63,7 +63,7 @@ CREATE TABLE `subcomment_table` (
   KEY `type` (`type`),
   KEY `paper_id` (`paper_id`),
   KEY `comment_id` (`comment_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Table structure for tags_index
@@ -86,25 +86,24 @@ CREATE TABLE `timeline_index` (
   `timeline` char(7) NOT NULL,
   `papers_count` int(10) unsigned NOT NULL,
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Table structure for user_table
 -- ----------------------------
 DROP TABLE IF EXISTS `user_table`;
 CREATE TABLE `user_table` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户表，自增id',
-  `account` char(20) NOT NULL COMMENT '用户表，登录名',
-  `password` char(20) NOT NULL COMMENT '用户表登录密码',
-  `user_name` char(20) CHARACTER SET utf8 NOT NULL COMMENT '用户表，用于显示的用户名',
-  `avatar` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '用户表，用户头像的图片名称',
-  `email` char(50) DEFAULT NULL COMMENT '用户表，绑定的邮箱',
-  `mobile` int(11) unsigned DEFAULT NULL COMMENT '用户表，绑定的手机号',
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `account` char(20) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `user_name` char(20) CHARACTER SET utf8 NOT NULL,
+  `avatar` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `email` char(50) DEFAULT NULL,
+  `mobile` char(255) DEFAULT NULL,
   `register_date` datetime NOT NULL,
-  `github_link` varchar(100) CHARACTER SET utf8 DEFAULT NULL COMMENT '用户表，github链接',
-  UNIQUE KEY `id` (`id`) COMMENT '数据库表中的id索引，唯一',
-  UNIQUE KEY `account` (`account`) COMMENT '数据库用户表中的登录名，唯一',
-  UNIQUE KEY `user_name` (`user_name`)
+  `github_link` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  UNIQUE KEY `id` (`id`),
+  KEY `account` (`account`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 DROP TRIGGER IF EXISTS `add_trigger_before`;
 DELIMITER ;;
@@ -130,7 +129,6 @@ DELIMITER ;
 DROP TRIGGER IF EXISTS `update_trigger_before`;
 DELIMITER ;;
 CREATE TRIGGER `update_trigger_before` BEFORE UPDATE ON `papers_table` FOR EACH ROW SET new.content = REPLACE(REPLACE(new.content, CHAR(10), ''), CHAR(13), '')
-;
 ;;
 DELIMITER ;
 DROP TRIGGER IF EXISTS `update_trigger_after`;
@@ -145,6 +143,7 @@ DROP TRIGGER IF EXISTS `delete_trigger`;
 DELIMITER ;;
 CREATE TRIGGER `delete_trigger` AFTER DELETE ON `papers_table` FOR EACH ROW BEGIN
 UPDATE tags_index SET papers_count = papers_count - 1 WHERE name = old.tag;
+UPDATE timeline_index SET papers_count = papers_count - 1 WHERE timeline = old.timeline;
 DELETE FROM comment_table WHERE paper_id = old.id;
 DELETE FROM subcomment_table WHERE paper_id = old.id;
 END

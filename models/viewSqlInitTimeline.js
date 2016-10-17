@@ -3,6 +3,7 @@ var mysql      = require('mysql'),
 
     viewSql = 'SELECT timeline,(papers_count + 0) AS papersCount' +
               ' FROM timeline_index ' +
+              ' WHERE papers_count > 0 ' +
               'ORDER BY timeline DESC',
               
     client;
