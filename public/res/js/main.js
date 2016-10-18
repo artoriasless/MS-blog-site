@@ -1,26 +1,15 @@
 console.log('Thx for visiting my blog!');
 
-/* init papers.html */
-$(document).ready(function(){
-    /* tooltip init */
-    $(function() {
-        $('[data-toggle="tooltip"]').tooltip();
-    })
-
-    /* slideUp notice content in 3s */
-    setTimeout(function() {
-        $('#noticeToggleBtn').closest('dl').find('dd').slideUp();
-        $('#noticeToggleBtn').find('.fa').removeClass('fa-caret-down').addClass('fa-caret-right');
-    }, 3000);
-
-    papers.init();
-})
-
 /* back to home directory */
 $('#blogLink').on('click', function() {
     if (!$('#bodyContainer').hasClass('init')) {
         papers.initCategory();
     }
+})
+
+/* tooltip init */
+$(function() {
+    $('[data-toggle="tooltip"]').tooltip();
 })
 
 /* toggle notice content */
@@ -40,8 +29,17 @@ $('a[data-toggle="tooltip"]').bind('click', function() {
 	$('#contactModal').modal('hide');
 })
 
-/* time roundabout init */
 $(document).ready(function() {
+    /* slideUp notice content in 3s */
+    setTimeout(function() {
+        $('#noticeToggleBtn').closest('dl').find('dd').slideUp();
+        $('#noticeToggleBtn').find('.fa').removeClass('fa-caret-down').addClass('fa-caret-right');
+    }, 3000);
+
+    /* init papers */
+    papers.init();
+
+    /* time roundabout init */
     var breakdown = getDateBreakdown();
     
     $('ul#hours-tens').roundabout({
