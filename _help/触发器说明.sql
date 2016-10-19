@@ -13,12 +13,17 @@ CREATE TRIGGER `add_trigger_after`
 AFTER INSERT ON `papers_table`
 FOR EACH ROW 
 BEGIN
-UPDATE tags_index SET papers_count = papers_count + 1 WHERE name = new.tag;
-SET @count = (SELECT COUNT(*) FROM timeline_index WHERE timeline = new.timeline);
-IF @count = 0 THEN
+SET @count1 = (SELECT COUNT(*) FROM timeline_index WHERE timeline = new.timeline);
+SET @count2 = (SELECT COUNT(*) FROM tags_index WHERE name = new.tag);
+IF @count1 = 0 THEN
 INSERT INTO timeline_index(timeline, papers_count) VALUES(new.timeline, 1);
 ELSE
 UPDATE timeline_index SET papers_count = papers_count + 1 WHERE timeline = new.timeline;
+END IF;
+IF @count2 = 0 THEN
+INSERT INTO tags_index(name, papers_count) VALUES(new.tag, 1);
+ELSE
+UPDATE tags_index SET papers_count = papers_count + 1 WHERE name = new.tag;
 END IF;
 END
 

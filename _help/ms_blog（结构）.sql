@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2016-10-17 09:34:43
+Date: 2016-10-19 11:10:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,7 +28,7 @@ CREATE TABLE `comment_table` (
   `paper_id` int(10) unsigned NOT NULL COMMENT '评论所属的文章id',
   `comment_date` datetime NOT NULL COMMENT '评论日期',
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Table structure for papers_table
@@ -45,7 +45,7 @@ CREATE TABLE `papers_table` (
   `content` text CHARACTER SET utf8 NOT NULL COMMENT '文章主体内容',
   UNIQUE KEY `id` (`id`),
   KEY `title` (`title`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Table structure for subcomment_table
@@ -63,7 +63,7 @@ CREATE TABLE `subcomment_table` (
   KEY `type` (`type`),
   KEY `paper_id` (`paper_id`),
   KEY `comment_id` (`comment_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Table structure for tags_index
@@ -75,7 +75,7 @@ CREATE TABLE `tags_index` (
   `papers_count` int(10) unsigned zerofill NOT NULL COMMENT '标签索引表，对应标签的文章数',
   UNIQUE KEY `id` (`id`) USING BTREE,
   UNIQUE KEY `name` (`name`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Table structure for timeline_index
@@ -116,12 +116,17 @@ DELIMITER ;
 DROP TRIGGER IF EXISTS `add_trigger_after`;
 DELIMITER ;;
 CREATE TRIGGER `add_trigger_after` AFTER INSERT ON `papers_table` FOR EACH ROW BEGIN
-UPDATE tags_index SET papers_count = papers_count + 1 WHERE name = new.tag;
-SET @count = (SELECT COUNT(*) FROM timeline_index WHERE timeline = new.timeline);
-IF @count = 0 THEN
+SET @count1 = (SELECT COUNT(*) FROM timeline_index WHERE timeline = new.timeline);
+SET @count2 = (SELECT COUNT(*) FROM tags_index WHERE name = new.tag);
+IF @count1 = 0 THEN
 INSERT INTO timeline_index(timeline, papers_count) VALUES(new.timeline, 1);
 ELSE
 UPDATE timeline_index SET papers_count = papers_count + 1 WHERE timeline = new.timeline;
+END IF;
+IF @count2 = 0 THEN
+INSERT INTO tags_index(name, papers_count) VALUES(new.tag, 1);
+ELSE
+UPDATE tags_index SET papers_count = papers_count + 1 WHERE name = new.tag;
 END IF;
 END
 ;;
