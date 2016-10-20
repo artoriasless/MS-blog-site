@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2016-10-19 11:10:17
+Date: 2016-10-20 10:45:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,7 +23,7 @@ CREATE TABLE `comment_table` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `type` int(2) unsigned NOT NULL DEFAULT '0',
   `content` text CHARACTER SET utf8 NOT NULL COMMENT '用户评论的主体内容',
-  `user_id` int(10) unsigned NOT NULL COMMENT '评论的用户id',
+  `user_id` int(10) unsigned DEFAULT NULL COMMENT '评论的用户id',
   `user_name` char(20) CHARACTER SET utf8 NOT NULL COMMENT '评论的用户名',
   `paper_id` int(10) unsigned NOT NULL COMMENT '评论所属的文章id',
   `comment_date` datetime NOT NULL COMMENT '评论日期',
@@ -58,7 +58,7 @@ CREATE TABLE `subcomment_table` (
   `paper_id` int(10) unsigned NOT NULL COMMENT '子评论所属的文章id',
   `comment_id` int(10) unsigned NOT NULL COMMENT '所属评论的id',
   `comment_date` datetime NOT NULL COMMENT '子评论发布的时间',
-  `user_name` char(20) CHARACTER SET utf8 DEFAULT NULL,
+  `user_name` char(20) CHARACTER SET utf8 NOT NULL,
   UNIQUE KEY `id` (`id`),
   KEY `type` (`type`),
   KEY `paper_id` (`paper_id`),
@@ -134,6 +134,7 @@ DELIMITER ;
 DROP TRIGGER IF EXISTS `update_trigger_before`;
 DELIMITER ;;
 CREATE TRIGGER `update_trigger_before` BEFORE UPDATE ON `papers_table` FOR EACH ROW SET new.content = REPLACE(REPLACE(new.content, CHAR(10), ''), CHAR(13), '')
+;
 ;;
 DELIMITER ;
 DROP TRIGGER IF EXISTS `update_trigger_after`;
