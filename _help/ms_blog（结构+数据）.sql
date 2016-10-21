@@ -100,14 +100,14 @@ CREATE TABLE `tags_index` (
 -- ----------------------------
 -- Records of tags_index
 -- ----------------------------
-INSERT INTO `tags_index` VALUES ('1', 'html&css', '0000000001');
-INSERT INTO `tags_index` VALUES ('2', 'javascript', '0000000003');
-INSERT INTO `tags_index` VALUES ('3', 'jquery', '0000000001');
-INSERT INTO `tags_index` VALUES ('4', 'json', '0000000001');
-INSERT INTO `tags_index` VALUES ('5', 'bootstrap', '0000000001');
-INSERT INTO `tags_index` VALUES ('6', 'nodejs', '0000000000');
-INSERT INTO `tags_index` VALUES ('7', 'reactjs', '0000000000');
-INSERT INTO `tags_index` VALUES ('8', 'linux', '0000000001');
+INSERT INTO `tags_index` VALUES ('1', 'html&css', '1');
+INSERT INTO `tags_index` VALUES ('2', 'javascript', '3');
+INSERT INTO `tags_index` VALUES ('3', 'jquery', '1');
+INSERT INTO `tags_index` VALUES ('4', 'json', '1');
+INSERT INTO `tags_index` VALUES ('5', 'bootstrap', '1');
+INSERT INTO `tags_index` VALUES ('6', 'nodejs', '0');
+INSERT INTO `tags_index` VALUES ('7', 'reactjs', '0');
+INSERT INTO `tags_index` VALUES ('8', 'linux', '1');
 
 -- ----------------------------
 -- Table structure for timeline_index
